@@ -1,0 +1,57 @@
+<br>
+<div class="container-fluid">
+	<div class="page-header">
+		<a routerLink="/users/counsellor/add" class="btn btn-primary">Add Counsellor</a>
+    <a class="btn btn-primary" (click)="toggleSearch()">Search Counsellor</a>
+    <a (click)="getAllCounsellors()" class="btn btn-primary">All Counsellors</a>
+	</div>
+ 	<div class="card">  
+    <div *ngIf="showSearch"  id="search">
+      <div class="card" id="search_form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" ngNativeValidate>
+          <h3 class="tab_title">Search Counsellor</h3>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Search By Name</label>
+            <div class="col-10">
+              <input class="form-control" type="text"  formControlName="name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Search By Email</label>
+            <div class="col-10">
+              <input class="form-control" type="text" formControlName="email">
+            </div>
+          </div>
+          <div class="sbt_btn">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>          
+  	<table class="table table-striped">
+    	<thead>
+      	<tr>
+          <th>#</th>
+        	<th>Name</th>
+        	<th>Email</th>
+          <th>Aadhar ID</th>
+        	<th>Details</th>
+          <th>Edit</th>
+          <th>Delete</th>
+     	</tr>
+    	</thead>
+    	<tbody>
+      		<tr *ngFor="let values of dataSource | paginate: { itemsPerPage: 10, currentPage: p }; let i= index" >
+            <td>{{ (p - 1) * 10 + i +1 }}</td>
+        		<td>{{values.name}}</td>
+        		<td>{{values.user.email}}</td>
+            <td>{{values.aadhar_id}}</td>
+        		<td><a (click) = "saveCounsellorId(values._id)" routerLink="/users/counsellor/details" >Details</a></td>
+            <td><i class="fa fa-pencil" routerLink="#"></i></td>
+            <td><i class="fa fa-trash" routerLink="#"></i></td>
+      		</tr>
+    	</tbody>
+  	</table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
