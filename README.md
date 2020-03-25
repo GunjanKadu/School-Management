@@ -21,5 +21,10 @@ Password:- 123
 
 # Glimpse of Project
 
+# Demo 1
+
 ![](Gif/Demo1.gif)
+
+# Demo 2
+
 ![](Gif/Demo2.gif)
