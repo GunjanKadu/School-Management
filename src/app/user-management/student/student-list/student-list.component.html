@@ -1,0 +1,95 @@
+<br>
+<div class="container-fluid">
+    <div class="page-header">
+        <a routerLink="/users/student/add" class="btn btn-primary">Add Student</a>
+        <a class="btn btn-primary" (click)="toggleSearch()">Search Student</a>
+        <a (click)="getAllStudents()" class="btn btn-primary">All Students</a>
+    </div>
+    <br><br>
+    <div class="card">
+        <div *ngIf="showSearch"  id="search">
+            <div class="card" id="search_form">
+                <form [formGroup]="form" (ngSubmit)="onSubmit()" ngNativeValidate>
+                    <h3 class="tab_title">Search Student</h3>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Search By Name</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" formControlName="name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Search By Library No.</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" formControlName="lib_no">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Search BY Standard</label>
+                        <div class="col-10">
+                            <select class="form-control" formControlName="standard" placeholder="Standard" >
+                                <option value="nursery" selected>Nursery</option>
+                                <option value="lkg">LKG</option>
+                                <option value="ukg">UKG</option>
+                                <option value="1st">1st</option>
+                                <option value="2nd">2nd</option>
+                                <option value="3rd">3rd</option>
+                                <option value="4th">4th</option>
+                                <option value="5th">5th</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label">Search By Section</label>
+                        <div class="col-10">
+                            <select class="form-control" formControlName="section" placeholder="Standard" >
+                                <option value="a" selected>A</option>
+                                <option value="b">B</option>
+                                <option value="c">C</option>
+                                <option value="d">D</option>
+                                <option value="e">E</option>
+                                <option value="f">F</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sbt_btn" >
+                        <button class="btn btn-primary"  type="submit">Search <img src="."></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="table">          
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                         <th>Profile</th>
+                        <th>Name</th>
+                        <th>Lib No.</th>
+                        <th>Standard</th>
+                        <th>Section</th>
+                        <th>Details</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr *ngFor="let values of dataSource | paginate: { itemsPerPage: 10, currentPage: p }; let i= index" >
+                        <td>{{ (p - 1) * 10 + i +1 }}</td>
+                        <td *ngIf="!values.parent.user.img; else wrong"><img src ="../../../assets/images/dummy.png" class="rounded-circle" height="50px" width="50px"></td>
+                         <ng-template #wrong><td><img src="https://schoolerp-api.herokuapp.com{{values.user.img}}" class="rounded-circle" height="50px" width="50px"></td></ng-template> 
+                        <td>{{values.name}}</td>
+                        <td>{{values.lib_no}}</td>
+                        <td>{{values.standard}}</td>
+                        <td>{{values.section}}</td>
+                       <td><a [routerLink]="['/users/student/details',values._id]">Details</a></td> 
+                        <td><i class="fa fa-pencil" [routerLink]="['/users/student/edit',values._id]"></i></td>
+                        <td><i class="fa fa-trash" routerLink="#"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</div>
+
+  
