@@ -1,0 +1,125 @@
+<div class="container">
+<br>
+<a routerLink="/users/student/add" class="btn btn-primary">Add Student</a>
+<a routerLink="/users/student/list" class="btn btn-primary">All Students</a>   
+  <div class="page-header">
+    <a routerLink="/users/student/details"></a>
+    <h2 class="tab_title">Student Profile</h2>
+  </div>
+  <hr class="featurette-divider">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card">       
+         <div class ="image" *ngIf="!dataSource.parent.user.img; else wrong"><img src ="../../../assets/images/dummy.png" class="rounded-circle" height="50px" width="50px"></div>
+          <ng-template #wrong><div class ="image"><img src="https://schoolerp-api.herokuapp.com{{dataSource.parent.user.img}}" class="rounded-circle" height="50px" width="50px"></div></ng-template> 
+          <br>
+          <table class="table table-striped" >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <td>{{dataSource.name}}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Library Number</th>
+                <td>{{dataSource.lib_no}}</td>
+              </tr>
+              <tr>
+                <th>Standard</th>
+                <td>{{dataSource.standard}}</td>
+              </tr>
+              <tr>
+                <th>Aadhar ID</th>
+                <td>{{dataSource.aadhar_id}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="card">
+          <div class="tab" align="right">
+            <button class="tablinks active" id="btn_student_tab" (click)="openTab('student_tab')">Student Details</button>
+            <button class="tablinks" id="btn_parent_tab"(click)="openTab('parent_tab')">Parents Details</button>
+          </div>
+          <div id="student_tab" class="tabcontent">
+            <br>
+            <h2 class="tab_title">Personal Details</h2>
+            <hr class="featurette-divider">  
+              <table  class="table table-striped" width="100%" >
+                <tbody>
+                  <tr>
+                    <th>Name</th>
+                    <td>{{dataSource.name}}</td>
+                    <th>Library Number</th>
+                    <td>{{dataSource.lib_no}}</td>
+                  </tr>
+                  <tr>
+                    <th>Gender</th>
+                    <td>{{dataSource.gender}}</td>
+                    <th>Aadhar ID</th>
+                    <td>{{dataSource.aadhar_id}}</td>
+                  </tr>
+                  <tr>
+                    <th>Standard</th>
+                    <td>{{dataSource.standard}}</td>
+                    <th>Section</th>
+                    <td>{{dataSource.section}}</td>
+                  </tr>
+                  <tr>
+                    <th>Date of Birth</th>
+                    <td>{{dataSource.dob}}</td>
+                    <th>Date of Joining</th>
+                    <td>{{dataSource.doj}}</td>
+                  </tr>
+                  <tr>
+                    <th>Previous School</th>
+                    <td>{{dataSource.previous_school}}</td>
+                    <th></th>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+          <div id="parent_tab" class="tabcontent">
+            <br>
+            <h2 class="tab_title">Parent's Details</h2>
+            <hr class="featurette-divider">
+            <div class="container">        
+              <table  class="table table-striped" width="100%" >
+                <tbody>
+                  <tr>
+                    <th> Mother Name</th>
+                    <td>{{dataSource.parent.mother_name}} </td>
+                    <th>Father Name</th>
+                    <td>{{dataSource.parent.father_name}} </td>
+                  </tr>
+                  <tr>
+                    <th>Mother Email</th>
+                    <td>{{dataSource.parent.mother_email}}</td>
+                    <th>Father Email</th>
+                    <td>{{dataSource.parent.father_email}}</td>
+                  </tr>
+                  <tr>
+                    <th>Mother Mobile No</th>
+                    <td>{{dataSource.parent.mother_mob_no}}</td>
+                    <th>Father Mobile No</th>
+                    <td>{{dataSource.parent.father_mob_no}}</td>
+                  </tr>
+                  <tr>
+                    <th>Mother Telephone No</th>
+                    <td>{{dataSource.parent.mother_tel_no}}</td>
+                    <th>Father Telephone No</th>
+                    <td>{{dataSource.parent.father_tel_no}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
